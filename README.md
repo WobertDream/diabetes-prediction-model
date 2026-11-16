@@ -12,7 +12,10 @@ Diabetes is a condition that results in blood sugar remaining at high levels in 
 
 ---
 
-## Exploratory Data Analysis (EDA) & Model Training
+## Dataset details & Model Tuning
+
+The **Diabetes prediction dataset** was sourced from [Kaggle](https://www.kaggle.com/datasets/iammustafatz/diabetes-prediction-dataset/data)
+
 The data preparation, exploratory data analysis, and model tuning steps are documented in `EDA.ipynb` and `train.py`.
 
 | Field | Description | Type |
