@@ -74,13 +74,13 @@ Three classification models were trained and evaluated on the stratified test se
 
 | Model | Test ROC AUC | Accuracy | Macro Precision | Macro Recall | Macro F1-Score |
 | :--- | :---: | :---: | :---: | :---: | :---: |
-| **Random Forest** *(Selected)* | **0.9555**[cite: 4] | **0.97**[cite: 4] | **0.98**[cite: 4] | **0.82**[cite: 4] | **0.88**[cite: 4] |
-| **XGBoost** | **0.9584** | 0.96[cite: 5] | 0.89[cite: 5] | **0.82**[cite: 5] | 0.85[cite: 5] |
-| **Logistic Regression** | 0.9474 | 0.96[cite: 6] | 0.93[cite: 6] | 0.78[cite: 6] | 0.83[cite: 6] |
+| **Random Forest** *(Selected)* | **0.9555** | **0.97** | **0.98** | **0.82** | **0.88** |
+| **XGBoost** | **0.9584** | 0.96 | 0.89 | **0.82** | 0.85 |
+| **Logistic Regression** | 0.9474 | 0.96 | 0.93 | 0.78 | 0.83 |
 
 ### Key Takeaways & Deployment Choice
-* **Performance Overview:** While XGBoost achieved a marginally higher ROC AUC (`0.9584` vs. `0.9555`[cite: 4]), **Random Forest** was selected for production because it delivered the most robust balance of precision (`1.00` for Class 1) and overall stability on the minority class at the standard `0.50` threshold.
-* **Imbalanced Class Handling:** Because positive diabetes cases comprise only ~8.5% of the data, overall accuracy (~96–97%)[cite: 4, 5, 6] remains high across all models. Prioritizing **Macro F1-Score** and **ROC AUC** provided a fairer evaluation of true predictive capability.
+* **Performance Overview:** While XGBoost achieved a marginally higher ROC AUC (`0.9584` vs. `0.9555`), **Random Forest** was selected for production because it delivered the most robust balance of precision (`1.00` for Class 1) and overall stability on the minority class at the standard `0.50` threshold.
+* **Imbalanced Class Handling:** Because positive diabetes cases comprise only ~8.5% of the data, overall accuracy (~96–97%) remains high across all models. Prioritizing **Macro F1-Score** and **ROC AUC** provided a fairer evaluation of true predictive capability.
 * **Project Limitation:** A default classification threshold of `0.50` was utilized across all models. Adjusting individual decision thresholds per model to optimize recall for medical screening is noted as an area for future improvement.
 
 ---
