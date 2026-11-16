@@ -15,32 +15,38 @@ This project covers the full end-to-end MLOps pipeline:
 ## How to Run Locally
 
 1. **Install dependencies:**
+
 bash
-> pip install -r requirements.txt
+```pip install -r requirements.txt```
 
 2. **Run the FastAPI service:**
+
 bash
-> uvicorn predict:app --reload --port 9696
+```uvicorn predict:app --reload --port 9696```
 
 3. **Test the endpoint (in a separate terminal):**
+
 bash
-> python test.py
+```python test.py```
 
 ---
 
 ## How to Run with Docker
 
 1. **Build the Docker image:**
+
 bash
-> docker build -t diabetes-prediction-service .
+```docker build -t diabetes-prediction-service . ```
 
 2. **Run the container:**
+
 bash
-> docker run --rm -p 9696:9696 diabetes-prediction-service
+```docker run --rm -p 9696:9696 diabetes-prediction-service```
 
 3. **Test the containerized service:**
+
 bash
-> python test.py
+```python test.py```
 
 ---
 
