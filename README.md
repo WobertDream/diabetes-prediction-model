@@ -19,8 +19,8 @@ The data preparation, exploratory data analysis, and model tuning steps are docu
 | :--- | :--- | :---: |
 | **gender** | Gender of the patient (e.g., M, F). | Categorical |
 | **age** | Age of the patient in years. | Numerical |
-| **hypertension** | Indicates whether the patient has hypertension ( `0`: no, `1`: yes). | Categorical |
-| **heart_disease** | Indicates whether the patient has heart disease ( `0`: no, `1`: yes). | Categorical |
+| **hypertension** | Indicates whether the patient has hypertension ( `0`: no, `1`: yes). | Binary |
+| **heart_disease** | Indicates whether the patient has heart disease ( `0`: no, `1`: yes). | Binary |
 | **smoking_history** | Smoking history category of the patient (yes, no, no info). | Categorical |
 | **bmi** | Body Mass Index calculated from weight and height. | Numerical |
 | **hba1c_level** | HbA1c blood sugar level of the patient. (%) | Numerical |
