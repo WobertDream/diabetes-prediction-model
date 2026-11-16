@@ -2,7 +2,7 @@
 
 ## Introduction
 
-Diabetes is a major public health challenge in first world nations, driven largely by aging populations, sedentary lifestyle and the rise of obesity. Early detection can then enable timely intervention for pre-diabetic individuals, preventing major chronic illnesses and infections from developing. This project leverages machine learning models to predict the likelihood an individual has diabetes given patient health features, built with **XGBoost**, **FastAPI**, and containerized using **Docker**.
+Diabetes is a major public health challenge in first world nations, driven largely by aging populations, sedentary lifestyle and the rise of obesity. Early detection can then enable timely intervention for pre-diabetic individuals, preventing major chronic illnesses and infections from developing. This project leverages machine learning models to predict the likelihood an individual has diabetes given patient health features, built with **RandomForest**, **FastAPI**, and containerized using **Docker**.
 
 ---
 
@@ -18,6 +18,8 @@ The **Diabetes prediction dataset** was sourced from [Kaggle](https://www.kaggle
 
 The data preparation, exploratory data analysis, and model tuning steps are documented in `EDA.ipynb` and `train.py`.
 
+### Fields Description
+
 | Field | Description | Type |
 | :--- | :--- | :---: |
 | **gender** | Gender of the patient (e.g., M, F). | Categorical |
@@ -30,11 +32,62 @@ The data preparation, exploratory data analysis, and model tuning steps are docu
 | **blood_glucose_level** | Blood glucose level of the patient. (mg/dl) | Numerical |
 | **diabetes** | Target variable indicating the presence of diabetes ( `0`: negative, `1`: positive). | Binary |
 
+### Preprocessing Adjustments
+- There were no missing values in the dataset
+
+With a mix of categorical, numerical and binary features, this dataset provides comprehensiveness when building a machine learning model for diabetes risk prediction.
+
 ---
 
+## Model Selection
+
+### Numerical Variable correlation
+
+The heatmap below shows a correlation matrix on the numerical features in the dataset
+![heatmap](Images/heatmap.png)
+
+**Observations:**
+  1. Moderate Correlation was:
+     - `age` and `bmi` (0.34), whereby older individuals are more likely to have a higher bmi.
+     - `blood_glucose_level` and `HbA1c_level` (0.20), whereby increased glucose levels in blood suggests higher percentage of glucose attaching to hemoglobin.
+
+  2. Weak Correlations observed: 
+     - `age` and `HbA1c_level` (0.08)
+     - `age` and `blood_glucose_level` (0.11)
+     - `bmi` and `HbA1c_level` (0.08)
+     - `bmi` and `blood_glucose_level` (0.14)
+
+With the weak relationships between features, this suggests a plausible assumption of minimal collinearity between features. As a result, it is then important to consider both Linear and Non-Linear Models as both could potentially capture significant patterns without hindrance.
+
+Thus, my choice of models for testing are:
+  1. XGBoost
+  2. Logistic Regression
+  3. Random Forest
+
+After fine tuning the parameters for each models and considering regularization for Logistic Regression, the next section shows a comparison of their performance across indicators chosen.
+
+---
+
+## Model Comparison & Performance
+
+Three classification models were trained and evaluated on the stratified test set (`n = 400`, with `34` positive diabetes cases) using a default probability threshold of `0.50`:
+
+| Model | Test ROC AUC | Accuracy | Macro Precision | Macro Recall | Macro F1-Score |
+| :--- | :---: | :---: | :---: | :---: | :---: |
+| **Random Forest** *(Selected)* | **0.9555**[cite: 4] | **0.97**[cite: 4] | **0.98**[cite: 4] | **0.82**[cite: 4] | **0.88**[cite: 4] |
+| **XGBoost** | **0.9584** | 0.96[cite: 5] | 0.89[cite: 5] | **0.82**[cite: 5] | 0.85[cite: 5] |
+| **Logistic Regression** | 0.9474 | 0.96[cite: 6] | 0.93[cite: 6] | 0.78[cite: 6] | 0.83[cite: 6] |
+
+### Key Takeaways & Deployment Choice
+* **Performance Overview:** While XGBoost achieved a marginally higher ROC AUC (`0.9584` vs. `0.9555`[cite: 4]), **Random Forest** was selected for production because it delivered the most robust balance of precision (`1.00` for Class 1) and overall stability on the minority class at the standard `0.50` threshold.
+* **Imbalanced Class Handling:** Because positive diabetes cases comprise only ~8.5% of the data, overall accuracy (~96–97%)[cite: 4, 5, 6] remains high across all models. Prioritizing **Macro F1-Score** and **ROC AUC** provided a fairer evaluation of true predictive capability.
+* **Project Limitation:** A default classification threshold of `0.50` was utilized across all models. Adjusting individual decision thresholds per model to optimize recall for medical screening is noted as an area for future improvement.
+
+---
+ 
 ## Project Overview
 This project covers the full end-to-end MLOps pipeline:
-1. **Training (`train.py`)**: Trains an XGBoost classifier on health data and saves the artifact.
+1. **Training (`train.py`)**: Trains a RandomForest classifier on health data and saves the artifact.
 2. **Serving (`predict.py`)**: Exposes a FastAPI prediction endpoint using Pydantic validation.
 3. **Containerization (`Dockerfile`)**: Packages the application into a lightweight Docker container for reproducible deployments.
 

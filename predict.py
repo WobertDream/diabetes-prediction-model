@@ -1,15 +1,15 @@
 import pickle
-import xgboost as xgb
 from fastapi import FastAPI
 from pydantic import BaseModel
 
-MODEL_FILE = 'xgb_model.bin'
+MODEL_FILE = 'model.bin'
 
 with open(MODEL_FILE, 'rb') as f_in:
     dv, model = pickle.load(f_in)
 
-app = FastAPI(title="Diabetes Prediction Service")
-class PatientRecord(base_model := BaseModel):
+app = FastAPI(title="Diabetes Prediction Service (Random Forest)")
+
+class PatientRecord(BaseModel):
     gender: str
     age: float
     hypertension: int
@@ -21,14 +21,12 @@ class PatientRecord(base_model := BaseModel):
 
 @app.post("/predict")
 def predict(patient: PatientRecord):
-
     patient_dict = patient.dict()
     X = dv.transform([patient_dict])
-    features = list(dv.get_feature_names_out())
-    dpred = xgb.DMatrix(X, feature_names=features)
 
-    pred_prob = float(model.predict(dpred)[0])
-    prediction = bool(pred_prob >= 0.52)
+    # Scikit-learn outputs probabilities for [class_0, class_1]
+    pred_prob = float(model.predict_proba(X)[0, 1])
+    prediction = bool(pred_prob >= 0.50)
     
     return {
         "diabetes_probability": pred_prob,

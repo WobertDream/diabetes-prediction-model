@@ -4,7 +4,7 @@ WORKDIR /app
 
 RUN pip install --no-cache-dir fastapi uvicorn xgboost scikit-learn pandas requests
 
-COPY predict.py xgb_model.bin ./
+COPY predict.py model.bin ./
 
 EXPOSE 9696
 
