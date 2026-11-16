@@ -4,4 +4,6 @@ xgboost
 scikit-learn
 pandas
 requests
-
+matplotlib
+numpy
+seaborn
