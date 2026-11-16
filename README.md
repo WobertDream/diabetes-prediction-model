@@ -4,13 +4,17 @@
 
 Diabetes is a major public health challenge in first world nations, driven largely by aging populations, sedentary lifestyle and the rise of obesity. Early detection can then enable timely intervention for pre-diabetic individuals, preventing major chronic illnesses and infections from developing. This project leverages machine learning models to predict the likelihood an individual has diabetes given patient health features, built with **RandomForest**, **FastAPI**, and containerized using **Docker**.
 
+
 ---
+
 
 ## Problem Description
 
 Diabetes is a condition that results in blood sugar remaining at high levels in the body for prolonged periods, which can lead to complications such as damaging blood vessels and nerves throughout the body. It is also a prevalent in adults living in developed nations with ranges between 8% and 12%, whereby 90% to 95% are type 2. This project uses the Kaggle Diabetes prediction dataset created by Mohammed Mustafa, containing 2,000 patient records with 8 features and 1 response column.
 
+
 ---
+
 
 ## Dataset details & Model Tuning
 
@@ -37,7 +41,9 @@ The data preparation, exploratory data analysis, and model tuning steps are docu
 
 With a mix of categorical, numerical and binary features, this dataset provides comprehensiveness when building a machine learning model for diabetes risk prediction.
 
+
 ---
+
 
 ## Model Selection
 
@@ -66,7 +72,9 @@ Thus, my choice of models for testing are:
 
 After fine tuning the parameters for each models and considering regularization for Logistic Regression, the next section shows a comparison of their performance across indicators chosen.
 
+
 ---
+
 
 ## Model Comparison & Performance
 
@@ -89,7 +97,9 @@ Three classification models were trained and evaluated on the stratified test se
   - **n_estimators**: 190
   - **min_samples_leaf**: 2
 
+
 ---
+
  
 ## Project Overview
 This project covers the full end-to-end MLOps pipeline:
@@ -97,7 +107,13 @@ This project covers the full end-to-end MLOps pipeline:
 2. **Serving (`predict.py`)**: Exposes a FastAPI prediction endpoint using Pydantic validation.
 3. **Containerization (`Dockerfile`)**: Packages the application into a lightweight Docker container for reproducible deployments.
 
+## Prerequisites
+  1. Python 3.8+: Ensure Python is installed on the machine and can be located
+  2. Docker (optional): To run the application in a containerized environment (not needed for local use)
+
+
 ---
+
 
 ## How to Run Locally
 
@@ -122,7 +138,9 @@ bash
 python test.py
 ```
 
+
 ---
+
 
 ## How to Run with Docker
 
@@ -147,7 +165,9 @@ bash
 python test.py
 ```
 
+
 ---
+
 
 ## Testing with Custom Parameters
 
@@ -169,3 +189,15 @@ patient_data = {
 }
 ```
 Refer to the above instructions on how to run locally or with Docker.
+
+
+---
+
+
+## Future Improvements
+
+* **Clinical Threshold Optimization:** Implement cost-sensitive threshold tuning on the validation set to prioritize minority-class recall and minimize false negatives for medical screening.
+* **Advanced Imbalance Handling:** Explore SMOTE or automated class-weight tuning to further optimize performance on the minority diabetes class.
+* **Model Explainability (SHAP):** Integrate SHAP values to provide feature-level explanations for individual patient predictions, enhancing clinical trust.
+* **Robust Validation:** Adopt Stratified K-Fold cross-validation to ensure model stability across varying data partitions.
+* **MLOps & Containerization:** Dockerize the FastAPI application and deploy it to a cloud service for public API access.

@@ -1,5 +1,4 @@
 __pycache__/
 .ipynb_checkpoints/
 myenv/
-xgb_model.bin
 diabetes-dataset-2k.csv
