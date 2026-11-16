@@ -83,6 +83,12 @@ Three classification models were trained and evaluated on the stratified test se
 * **Imbalanced Class Handling:** Because positive diabetes cases comprise only ~8.5% of the data, overall accuracy (~96–97%) remains high across all models. Prioritizing **Macro F1-Score** and **ROC AUC** provided a fairer evaluation of true predictive capability.
 * **Project Limitation:** A default classification threshold of `0.50` was utilized across all models. Adjusting individual decision thresholds per model to optimize recall for medical screening is noted as an area for future improvement.
 
+**Tuned Parameters for Random Forest Model:**
+
+  - **max_depth**: 15
+  - **n_estimators**: 190
+  - **min_samples_leaf**: 2
+
 ---
  
 ## Project Overview
