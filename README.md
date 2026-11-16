@@ -1,8 +1,33 @@
-# diabetes-prediction-model
-
 # Diabetes Prediction Model & Deployment
 
-A machine learning web service that predicts the likelihood of diabetes based on patient health features, built with **XGBoost**, **FastAPI**, and containerized using **Docker**.
+## Introduction
+
+Diabetes is a major public health challenge in first world nations, driven largely by aging populations, sedentary lifestyle and the rise of obesity. Early detection can then enable timely intervention for pre-diabetic individuals, preventing major chronic illnesses and infections from developing. This project leverages machine learning models to predict the likelihood an individual has diabetes given patient health features, built with **XGBoost**, **FastAPI**, and containerized using **Docker**.
+
+---
+
+## Problem Description
+
+Diabetes is a condition that results in blood sugar remaining at high levels in the body for prolonged periods, which can lead to complications such as damaging blood vessels and nerves throughout the body. It is also a prevalent in adults living in developed nations with ranges between 8% and 12%, whereby 90% to 95% are type 2. This project uses the Kaggle Diabetes prediction dataset created by Mohammed Mustafa, containing 2,000 patient records with 8 features and 1 response column.
+
+---
+
+## Exploratory Data Analysis (EDA) & Model Training
+The data preparation, exploratory data analysis, and model tuning steps are documented in `EDA.ipynb` and `train.py`.
+
+| Field | Description | Type |
+| :--- | :--- | :---: |
+| **gender** | Gender of the patient (e.g., M, F). | Categorical |
+| **age** | Age of the patient in years. | Numerical |
+| **hypertension** | Indicates whether the patient has hypertension ( `0`: no, `1`: yes). | Categorical |
+| **heart_disease** | Indicates whether the patient has heart disease ( `0`: no, `1`: yes). | Categorical |
+| **smoking_history** | Smoking history category of the patient (yes, no, no info). | Categorical |
+| **bmi** | Body Mass Index calculated from weight and height. | Numerical |
+| **hba1c_level** | HbA1c blood sugar level of the patient. (%) | Numerical |
+| **blood_glucose_level** | Blood glucose level of the patient. (mg/dl) | Numerical |
+| **diabetes** | Target variable indicating the presence of diabetes ( `0`: negative, `1`: positive). | Binary |
+
+---
 
 ## Project Overview
 This project covers the full end-to-end MLOps pipeline:
